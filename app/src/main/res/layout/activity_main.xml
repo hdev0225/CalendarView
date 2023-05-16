@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+    <Button
+        android:id="@+id/simple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="简单使用" />
+    <Button
+        android:id="@+id/select_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="单选" />
+
+    <Button
+        android:id="@+id/select_multi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多选" />
+
+    <Button
+        android:id="@+id/select_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选中一周" />
+
+    <Button
+        android:id="@+id/select_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="区间选择" />
+
+    <Button
+        android:id="@+id/style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="样式设置" />
+
+</LinearLayout>

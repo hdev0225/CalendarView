@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hdev.calendar.view.RangeCalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#ffffff"
+        app:header_view="com.hdev.calendar.view.DefaultRangeHeaderView"
+        app:selected_bg_color="#0078D7"
+        app:selected_range_bg_color="#800078D7" />
+
+    <Button
+        android:id="@+id/set_date_range"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:text="设置日期范围2023-1-20 -- 2023-5-10" />
+
+</RelativeLayout>

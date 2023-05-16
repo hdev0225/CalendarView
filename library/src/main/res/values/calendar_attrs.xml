@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <declare-styleable name="CalendarView">
+        <!-- 头部，包名+类型 -->
+        <attr name="header_view" format="string" />
+        <!-- 星期标题颜色 -->
+        <attr name="week_title_color" format="color|reference" />
+        <!-- 星期标题字体大小 -->
+        <attr name="week_title_font_size" format="dimension" />
+        <!-- 星期标题，以分号分割，如：一、二、三、四、五、六、日。起始星期为星期一 -->
+        <attr name="week_title_label" format="string" />
+        <!-- 日期字体大小 -->
+        <attr name="day_font_size" format="dimension" />
+        <!-- 默认文字颜色 -->
+        <attr name="default_color" format="color|reference" />
+        <!-- 默认文字灰色 -->
+        <attr name="default_dim_color" format="color|reference" />
+        <!-- 周未颜色 -->
+        <attr name="weekend_color" format="color|reference" />
+        <!-- 选中背景色 -->
+        <attr name="selected_bg_color" format="color|reference" />
+        <!-- 选中区间背景色，开始与结束之间的日期 -->
+        <attr name="selected_range_bg_color" format="color|reference" />
+        <!-- 选中day颜色 -->
+        <attr name="selected_day_color" format="color|reference" />
+        <!-- 范围选择或者按星期选择的日历时，该日期不能选择，但在范围或者星期之间 -->
+        <attr name="selected_day_dim_color" format="color|reference" />
+    </declare-styleable>
+</resources>

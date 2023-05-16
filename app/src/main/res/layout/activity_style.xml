@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.hdev.calendar.view.SingleCalendarView
+        android:id="@+id/calendar_view"
+        android:layout_width="350dp"
+        android:layout_height="335dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/bg"
+        app:day_font_size="16sp"
+        app:default_color="#000000"
+        app:default_dim_color="#AAAAAA"
+        app:header_view="com.calendar.app.view.CustomHeaderView"
+        app:selected_bg_color="#0078D7"
+        app:selected_day_color="#EFEFEF"
+        app:week_title_color="#ff0000"
+        app:week_title_font_size="12sp"
+        app:week_title_label="M、T、W、T、F、S、S"
+        app:weekend_color="#F96A31" />
+</RelativeLayout>
