@@ -25,7 +25,7 @@ allprojects {
 > 2、添加依赖到模块中的build.gradle
 ```java
 dependencies {
-    implementation 'com.github.hdev0225:CalendarView:v1.0.2'
+    implementation 'com.github.hdev0225:CalendarView:v1.0.5'
 }
 ```
 
