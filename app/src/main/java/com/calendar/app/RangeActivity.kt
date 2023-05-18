@@ -25,7 +25,7 @@ class RangeActivity : AppCompatActivity() {
         val calendarView: RangeCalendarView = findViewById(R.id.calendar_view)
         calendarView.setSelectedDateRange(DateInfo(2023, 2, 21),
             DateInfo(2023, 5, 13))
-        calendarView.unClickableDateList = dateList
+//        calendarView.unClickableDateList = dateList
 
         calendarView.setOnDateRangeSelectedListener {
                 _, // 日历控件

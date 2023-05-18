@@ -34,7 +34,7 @@ dependencies {
 ##### [单选日历](#单选)
 ##### [多选日历](#多选)
 ##### [按星期选择日历](#按星期选择)
-##### [日期区间选择](#按日期区间选择)
+##### [日期范围选择](#按日期范围选择)
 ##### [设置样式](#设置日历样式)
 ##### [设置不可选择日期列表](#设置不可选择日期)
 ##### [设置只可选择某些日期列表](#设置只可选择某些日期)
@@ -136,10 +136,10 @@ calendarView.setOnDateRangeSelectedListener {
 }
 ```
 
-### 按日期区间选择
+### 按日期范围选择
 ![image](https://github.com/hdev0225/CalendarView/blob/master/preview/range.gif)
 ```xml
-<com.hdev.calendar.view.RangeCalendarView
+    <com.hdev.calendar.view.RangeCalendarView
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="400dp"
@@ -148,7 +148,12 @@ calendarView.setOnDateRangeSelectedListener {
     android:background="#ffffff"
     app:header_view="com.hdev.calendar.view.DefaultRangeHeaderView"
     app:selected_bg_color="#0078D7"
-    app:selected_range_bg_color="#800078D7" />
+    app:selected_end_bg_color="#ff0000"
+    app:selected_end_day_color="#ffffff"
+    app:selected_range_bg_color="#88ff0000"
+    app:selected_range_day_color="#ffffff"
+    app:selected_start_bg_color="#ff0000"
+    app:selected_start_day_color="#ffffff" />
 ```
 
 ```java
@@ -187,6 +192,7 @@ calendarView.setOnDateRangeSelectedListener {
     app:week_title_label="M、T、W、T、F、S、S"
     app:weekend_color="#F96A31" />
 ```
+#### 通用属性
 > header_view：头部，包名+类型，需要继承BaseHeaderView类，自定义头部
 
 > day_font_size：日期字体大小，eg: 16sp
@@ -207,10 +213,20 @@ calendarView.setOnDateRangeSelectedListener {
 
 > selected_day_color：选中日子颜色，类型：颜色码或者颜色引用, eg:#ffff00或者R.color.red;
 
-> selected_range_bg_color：选中区间背景色，开始与结束之间的日期(不包括开始和结束日期), eg:#ffff00或者R.color.red;
-
 > selected_day_dim_color：范围选择或者按星期选择的日历时，该日期不能选择，但在范围或者星期之间, eg:#ffff00或者R.color.red;
 
+#### 日期范围属性
+> selected_range_bg_color：选中区间背景色，开始与结束之间的日期(不包括开始和结束日期), eg:#ffff00或者R.color.red;
+ 
+> selected_range_day_color：选中区间字体颜色，开始与结束之间的日期(不包括开始和结束日期), eg:#ffff00或者R.color.red;
+ 
+> selected_start_bg_color：开始日期背景色, eg:#ffff00或者R.color.red;
+ 
+> selected_start_day_color：开始日期字体颜色, eg:#ffff00或者R.color.red;
+ 
+> selected_end_bg_color：结束日期背景色, eg:#ffff00或者R.color.red;
+
+> selected_end_day_color：结束日期字体颜色, eg:#ffff00或者R.color.red;
 
 ### 设置不可选择日期
 ```java

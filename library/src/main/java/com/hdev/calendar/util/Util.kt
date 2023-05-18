@@ -26,11 +26,13 @@
 package com.hdev.calendar.util
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.util.AttributeSet
 import android.util.TypedValue
 import com.hdev.calendar.R
 import com.hdev.calendar.base.BaseHeaderView
+import com.hdev.calendar.bean.RangeViewAttrs
 import com.hdev.calendar.bean.ViewAttrs
 import com.hdev.calendar.constant.Const
 import com.hdev.calendar.view.DefaultHeaderView
@@ -50,11 +52,44 @@ object Util {
     }
 
     /**
-     * 创建view attrs
+     * 设置控件通用属性
      */
-    fun createVieAttrs(context: Context, attrs: AttributeSet): ViewAttrs {
-        var viewAttrs = ViewAttrs()
+    fun createViewAttrs(context: Context, attrs: AttributeSet): ViewAttrs {
+        val viewAttrs = ViewAttrs()
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CalendarView)
+        setViewAttr(context, viewAttrs, typedArray)
+        typedArray.recycle()
+        return viewAttrs
+    }
+
+    /**
+     * 范围控件属性
+     */
+    fun createRangeViewAttrs(context: Context, attrs: AttributeSet): RangeViewAttrs {
+        val viewAttrs = RangeViewAttrs()
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CalendarView)
+        setViewAttr(context, viewAttrs, typedArray)
+
+        viewAttrs.selectedRangeBgColor = typedArray.getColor( R.styleable.CalendarView_selected_range_bg_color,
+            Color.parseColor("#800078D7"))
+        viewAttrs.selectedRangeDayColor = typedArray.getColor( R.styleable.CalendarView_selected_range_day_color,
+            Color.parseColor("#ffffff"))
+        viewAttrs.selectedStartBgColor = typedArray.getColor( R.styleable.CalendarView_selected_start_bg_color,
+            Color.parseColor("#0037A6"))
+        viewAttrs.selectedStartDayColor = typedArray.getColor( R.styleable.CalendarView_selected_start_day_color,
+            Color.parseColor("#ffffff"))
+        viewAttrs.selectedEndBgColor = typedArray.getColor( R.styleable.CalendarView_selected_end_bg_color,
+            Color.parseColor("#0037A6"))
+        viewAttrs.selectedEndDayColor = typedArray.getColor( R.styleable.CalendarView_selected_end_day_color,
+            Color.parseColor("#ffffff"))
+        typedArray.recycle()
+        return viewAttrs
+    }
+
+    /**
+     * 设置控件属性
+     */
+    private fun setViewAttr(context: Context, viewAttrs: ViewAttrs, typedArray: TypedArray) {
         viewAttrs.weekTitleColor = typedArray.getColor(R.styleable.CalendarView_week_title_color,
             Color.parseColor("#666666"))
         viewAttrs.defaultColor = typedArray.getColor(R.styleable.CalendarView_default_color,
@@ -65,8 +100,6 @@ object Util {
             Color.parseColor("#3568B9"))
         viewAttrs.selectedBgColor = typedArray.getColor(R.styleable.CalendarView_selected_bg_color,
             Color.parseColor("#0037A6"))
-        viewAttrs.selectedRangeBgColor = typedArray.getColor( R.styleable.CalendarView_selected_range_bg_color,
-            Color.parseColor("#800078D7"))
         viewAttrs.selectedDayColor = typedArray.getColor(R.styleable.CalendarView_selected_day_color,
             Color.parseColor("#FFFFFF"))
         viewAttrs.selectedDayDimColor = typedArray.getColor(R.styleable.CalendarView_selected_day_dim_color,
@@ -80,8 +113,6 @@ object Util {
         )
         viewAttrs.weekTitleLabel = typedArray.getString(R.styleable.CalendarView_week_title_label)
         viewAttrs.headerView = typedArray.getString(R.styleable.CalendarView_header_view)
-        typedArray.recycle()
-        return viewAttrs
     }
 
     /**

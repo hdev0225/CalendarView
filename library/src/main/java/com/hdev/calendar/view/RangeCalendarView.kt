@@ -30,10 +30,12 @@ import android.util.AttributeSet
 import com.hdev.calendar.base.BaseCalendarView
 import com.hdev.calendar.base.BaseMonthView
 import com.hdev.calendar.bean.DateInfo
+import com.hdev.calendar.bean.RangeViewAttrs
 import com.hdev.calendar.bean.ViewAttrs
 import com.hdev.calendar.listener.IDateRange
 import com.hdev.calendar.listener.OnDateRangeSelectedListener
 import com.hdev.calendar.listener.OnDateSelectedListener
+import com.hdev.calendar.util.Util
 import com.hdev.calendar.view.month.RangeMonthView
 import java.util.*
 
@@ -54,10 +56,17 @@ class RangeCalendarView(
     private var listener: OnDateRangeSelectedListener? = null
 
     /**
+     * 初始化控件属性
+     */
+    override fun initViewAttrs(attrs: AttributeSet) {
+        viewAttrs = Util.createRangeViewAttrs(context, attrs)
+    }
+
+    /**
      * 创建月份
      */
     override fun createMonthView(position: Int, currentMonth: Calendar, viewAttrs: ViewAttrs): BaseMonthView {
-        var monthView = RangeMonthView(context, currentMonth, position, viewAttrs)
+        var monthView = RangeMonthView(context, currentMonth, position, viewAttrs as RangeViewAttrs)
         monthView.setDateRange(startDate, endDate)
         monthView.onDateSelectedListener = object : OnDateSelectedListener {
             override fun onDateSelected(dateInfo: DateInfo, changeMonth: Boolean, monthPosition: Int) {

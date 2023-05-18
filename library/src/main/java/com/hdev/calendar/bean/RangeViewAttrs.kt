@@ -26,41 +26,26 @@
 package com.hdev.calendar.bean
 
 /**
- * 控件属性
- * Created by han on 2023/4/6.
+ * 范围日历view自定义属性
+ * Created by han on 2023/5/18.
  */
-open class ViewAttrs {
+class RangeViewAttrs() : ViewAttrs() {
 
-    // 星期标题颜色
-    var weekTitleColor = 0
+    // 选中区间背景色，开始与结束之间的日期
+    var selectedRangeBgColor = 0
 
-    // 星期字体大小
-    var weekTitleFontSize = 0f
+    // 选中区间字体颜色，开始与结束之间的日期
+    var selectedRangeDayColor = 0
 
-    // 星期标题，以分号分割，如：一、二、三、四、五、六、日
-    var weekTitleLabel: String? = ""
+    // 开始日期背景色
+    var selectedStartBgColor = 0
 
-    // 日期字体大小
-    var dayFontSize = 0f
+    // 开始日期字体颜色
+    var selectedStartDayColor = 0
 
-    // 默认文字颜色
-    var defaultColor = 0
+    // 结束日期背景色
+    var selectedEndBgColor = 0
 
-    // 默认文字灰色
-    var defaultDimColor = 0
-
-    // 周未颜色
-    var weekendColor = 0
-
-    // 选中背景色
-    var selectedBgColor = 0
-
-    // 选中day颜色
-    var selectedDayColor = 0
-
-    // 全限定类名； 通过反射创建header view
-    var headerView: String? = null
-
-    // 范围选择或者按星期选择时，该日期不能选择，但该日子在范围或者星期之间
-    var selectedDayDimColor = 0
+    // 结束日期字体颜色
+    var selectedEndDayColor = 0
 }

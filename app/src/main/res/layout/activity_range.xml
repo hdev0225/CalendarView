@@ -14,7 +14,12 @@
         android:background="#ffffff"
         app:header_view="com.hdev.calendar.view.DefaultRangeHeaderView"
         app:selected_bg_color="#0078D7"
-        app:selected_range_bg_color="#800078D7" />
+        app:selected_end_bg_color="#ff0000"
+        app:selected_end_day_color="#ffffff"
+        app:selected_range_bg_color="#88ff0000"
+        app:selected_range_day_color="#ffffff"
+        app:selected_start_bg_color="#ff0000"
+        app:selected_start_day_color="#ffffff" />
 
     <Button
         android:id="@+id/set_date_range"

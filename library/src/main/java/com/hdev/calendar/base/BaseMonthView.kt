@@ -143,13 +143,12 @@ abstract class BaseMonthView (
      * 绘制日期文本
      */
     protected open fun drawDay(canvas: Canvas?, dateItem: DateItem) {
-        // 设置画笔颜色
-        setMainPaintColor(dateItem)
-
         // 绘制选中效果
         var handleSelectedDate = drawSelectedDay(canvas, dateItem)
 
         if (!handleSelectedDate) {
+            // 设置画笔颜色
+            setMainPaintColor(dateItem)
             // 绘制普通文本
             drawDayText(canvas, dateItem, mainPaint)
         }
@@ -208,7 +207,7 @@ abstract class BaseMonthView (
         mainPaint.color = viewAttrs.defaultDimColor!!
     }
 
-    protected fun setClickablePaintColor(date: DateInfo) {
+    protected open fun setClickablePaintColor(date: DateInfo) {
         // 可点击日期中是否存在该日期，如果存在，则画笔设置高亮
         if (clickableDateList?.contains(date) == true) {
             selectedPaint.color = viewAttrs.selectedDayColor
@@ -217,7 +216,7 @@ abstract class BaseMonthView (
         }
     }
 
-    protected fun setUnClickablePaintColor(date: DateInfo) {
+    protected open fun setUnClickablePaintColor(date: DateInfo) {
         // 不可点击日期中是否存在该日期，如果存在，则画笔设置灰色
         if (unClickableDateList?.contains(date) == true) {
             selectedPaint.color = viewAttrs.selectedDayDimColor

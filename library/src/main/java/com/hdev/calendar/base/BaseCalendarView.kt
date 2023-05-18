@@ -29,7 +29,6 @@ import CalendarAdapter
 import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.LinearLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
@@ -68,7 +67,7 @@ abstract class BaseCalendarView(
     protected lateinit var headerView: BaseHeaderView
 
     // 控件属性
-    private var viewAttrs: ViewAttrs
+    protected lateinit var viewAttrs: ViewAttrs
 
     // 上下、左右间距
     private var padding: Int = Util.dp2px(context, 10f).toInt()
@@ -137,20 +136,37 @@ abstract class BaseCalendarView(
     init {
         // 设置垂直方向显示控件
         orientation = VERTICAL
-        viewAttrs = Util.createVieAttrs(context, attrs)
+        initViewAttrs(attrs)
+        initViewPager()
+        initHeaderView(viewAttrs.headerView)
+        initWeekView()
+        initDate()
+        addView(viewPager)
+    }
 
-        viewPager = ViewPager(context, attrs)
+    /**
+     * 初始化控件属性
+     */
+    protected open fun initViewAttrs(attrs: AttributeSet) {
+        viewAttrs = Util.createViewAttrs(context, attrs)
+    }
+
+    /**
+     * 初始化view pager
+     */
+    private fun initViewPager() {
+        viewPager = ViewPager(context)
         viewPager.setBackgroundColor(Color.TRANSPARENT)
         calendarAdapter = CalendarAdapter(minDate) { position: Int, monthDate: Calendar ->
-                val monthView = createMonthView(position, monthDate, viewAttrs)
-                monthView.tag = Util.getMonthViewTag(position)
-                monthView.minDate = minDate
-                monthView.maxDate = maxDate
-                monthView.unClickableDateList = unClickableDateList
-                monthView.clickableDateList = clickableDateList
-                monthView.clickableType = clickableType
-                monthView.padding = padding
-                monthView
+            val monthView = createMonthView(position, monthDate, viewAttrs)
+            monthView.tag = Util.getMonthViewTag(position)
+            monthView.minDate = minDate
+            monthView.maxDate = maxDate
+            monthView.unClickableDateList = unClickableDateList
+            monthView.clickableDateList = clickableDateList
+            monthView.clickableType = clickableType
+            monthView.padding = padding
+            monthView
         }
         viewPager.adapter = calendarAdapter
         // WARNING 动态添加view pager，需要设置id，否则方向旋转时出现以下错误
@@ -158,11 +174,6 @@ abstract class BaseCalendarView(
         // This view's id is id/calendar_view. Make sure other views do not use the same id
         viewPager.id = R.id.view_pager
         viewPager.addOnPageChangeListener(pageChangeListener)
-
-        initHeaderView(viewAttrs.headerView)
-        initWeekView()
-        initDate()
-        addView(viewPager)
     }
 
     /**
