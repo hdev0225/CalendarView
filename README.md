@@ -204,7 +204,8 @@ calendarView.setOnDateRangeSelectedListener {
 
 > week_title_label：星期标题，以顿号分割，如：一、二、三、四、五、六、日。起始星期为星期一;
 
-> first_day_of_week：一周的第一天，1表示星期一，2表示星期二，7表示星期天，注！！！：设置了first_day_of_week，需要同时设置week_title_label
+##### 注！！！：设置了first_day_of_week，需要同时设置week_title_label
+> first_day_of_week：一周的第一天，1表示星期一，2表示星期二，7表示星期天;  
 
 > default_color：默认文字颜色，类型：颜色码或者颜色引用, eg:#ffff00或者R.color.red;
 
