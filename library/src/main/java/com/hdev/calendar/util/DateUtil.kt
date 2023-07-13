@@ -265,8 +265,10 @@ object DateUtil {
 
     /**
      * 构建月份日期
+     * @param timeInMillis 日历时间戳
+     * @param theFirstDayOfWeek 用户设置一周的第一天是星期几，默认为1
      */
-    fun buildDateList(timeInMillis: Long): List<DateInfo> {
+    fun buildDateList(timeInMillis: Long, theFirstDayOfWeek: Int = 1): List<DateInfo> {
         var calendar = Calendar.getInstance()
         calendar.timeInMillis = timeInMillis
 
@@ -287,27 +289,42 @@ object DateUtil {
             dateList.add(date)
         }
 
-        // 如果本月第一天不是星期一，则用上一月的日期补足本星期
-        buildPrevDate(timeInMillis, firstDayOfWeek, dateList)
+        // 根据theFirstDayOfWeek构建星期数据
+        val weekList = buildWeekByFirstDayOfWeek(theFirstDayOfWeek)
 
-        // 如果本月最后一天不是星期天，则用下一月的日期补足本星期
-        buildNextDate(timeInMillis, lastDayOfWeek, dateList)
+        // 日历前面需要补的天数
+        val firstFixDays = getDayIndexInWeek(firstDayOfWeek, weekList)
+        // 日历后面需要补的天数
+         val lastFixDays = getDayIndexInWeek(lastDayOfWeek, weekList)
+
+        // 日历前面有空位，则用上一个月的日期补足本星期
+        buildPrevDate(timeInMillis, firstFixDays, dateList)
+
+        // 日历后面有空位，则用下一个月的日期补足本星期
+        buildNextDate(timeInMillis, lastFixDays, dateList)
 
         // 星期行数为6行，如果少于6行，则补足6行
         fixWeek(dateList)
         return dateList
     }
 
-    private fun buildPrevDate(timeInMillis: Long, firstDayOfWeek: Int, dateList: MutableList<DateInfo>) {
-        if (firstDayOfWeek != 1) {
-            var calendar = Calendar.getInstance()
+    /**
+     * 构建月份日期
+     * @param timeInMillis 日历时间戳
+     * @param fixDays 需要补足的天数
+     * @param dateList 当前月份日期列表
+     */
+    private fun buildPrevDate(timeInMillis: Long, fixDays: Int, dateList: MutableList<DateInfo>) {
+        // 日历前面有空位，则用上个月的日期补足本星期
+        if (fixDays != 0) {
+            val calendar = Calendar.getInstance()
             calendar.timeInMillis = timeInMillis
             // 设置上一月份
             calendar[Calendar.MONTH] = calendar[Calendar.MONTH] - 1
-            var daysOfMonth = getDaysOfMonth(calendar.timeInMillis)
-            var year = calendar[Calendar.YEAR]
-            var month = calendar[Calendar.MONTH] + 1
-            for (index in 1 until firstDayOfWeek) {
+            val daysOfMonth = getDaysOfMonth(calendar.timeInMillis)
+            val year = calendar[Calendar.YEAR]
+            val month = calendar[Calendar.MONTH] + 1
+            for (index in 1 .. fixDays) {
                 var date = DateInfo(year, month, daysOfMonth - index + 1)
                 date.type = DateInfo.DateType.PREV
                 dateList.add(0, date)
@@ -315,20 +332,63 @@ object DateUtil {
         }
     }
 
-    private fun buildNextDate(timeInMillis: Long, lastDayOfWeek: Int, dateList: MutableList<DateInfo>) {
-        if (lastDayOfWeek != 7) {
-            var calendar = Calendar.getInstance()
+    /**
+     * 构建月份日期
+     * @param timeInMillis 日历时间戳
+     * @param fixDays 需要补足的天数
+     * @param dateList 当前月份日期列表
+     */
+    private fun buildNextDate(timeInMillis: Long, fixDays: Int, dateList: MutableList<DateInfo>) {
+        if (fixDays != 7) {
+            val calendar = Calendar.getInstance()
             calendar.timeInMillis = timeInMillis
             // 设置下一月份
             calendar[Calendar.MONTH] = calendar[Calendar.MONTH] + 1
-            var year = calendar[Calendar.YEAR]
-            var month = calendar[Calendar.MONTH] + 1
-            for (index in 1 .. 7 - lastDayOfWeek) {
-                var date = DateInfo(year, month, index)
+            val year = calendar[Calendar.YEAR]
+            val month = calendar[Calendar.MONTH] + 1
+            for (index in 1 until 7 - fixDays) {
+                val date = DateInfo(year, month, index)
                 date.type = DateInfo.DateType.NEXT
                 dateList.add(date)
             }
         }
+    }
+
+    /**
+     * 构建星期数据
+     * @param firstDayOfWeek 一周的第一天，1表示星期一，7表示星期天
+     * 当theFirstDateOfWeek为7时，返回[7, 1, 2, 3, 4, 5, 6]
+     * 当theFirstDateOfWeek为3时，返回[3, 4, 5, 6, 7, 1, 2]
+     * 当theFirstDateOfWeek为6时，返回[6, 7, 1, 2, 3, 4, 5]
+     */
+    private fun buildWeekByFirstDayOfWeek(firstDayOfWeek: Int): List<Int> {
+        val daysOfWeek = 7
+        val weekList = mutableListOf<Int>()
+        for (day in firstDayOfWeek .. daysOfWeek) {
+            weekList.add(day)
+        }
+        // 不足7天，补够7天
+        if (weekList.size < daysOfWeek) {
+            for (day in 1 .. daysOfWeek - weekList.size) {
+                weekList.add(day)
+            }
+        }
+        return weekList
+    }
+
+    /**
+     * 获取日期在一周中的索引号
+     * @param dayOfWeek 星期几
+     * 如第一天为星期日，weekList=[7, 1, 2, 3, 4, 5, 6]，dayOfWeek=5，索引号为5，当前日历前面需要补5天
+     * 如第一天为星期三，weekList=[3, 4, 5, 6, 7, 1, 2]，dayOfWeek=5，索引号为2，当前日历前面需要补2天
+     */
+    private fun getDayIndexInWeek(dayOfWeek: Int, weekList: List<Int>): Int {
+        for (index in 0 .. weekList.size) {
+            if (dayOfWeek == weekList[index]) {
+                return index
+            }
+        }
+        return 0
     }
 
     private fun fixWeek(dateList: MutableList<DateInfo>) {

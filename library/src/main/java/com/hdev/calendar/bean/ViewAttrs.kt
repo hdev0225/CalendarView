@@ -37,8 +37,11 @@ open class ViewAttrs {
     // 星期字体大小
     var weekTitleFontSize = 0f
 
-    // 星期标题，以分号分割，如：一、二、三、四、五、六、日
+    // 星期标题，以顿号分割，如：一、二、三、四、五、六、日
     var weekTitleLabel: String? = ""
+
+    // 一周的第一天
+    var firstDayOfWeek: Int = 0
 
     // 日期字体大小
     var dayFontSize = 0f

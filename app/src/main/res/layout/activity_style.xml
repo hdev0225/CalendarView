@@ -19,6 +19,7 @@
         app:selected_day_color="#EFEFEF"
         app:week_title_color="#ff0000"
         app:week_title_font_size="12sp"
-        app:week_title_label="M、T、W、T、F、S、S"
+        app:first_day_of_week="6"
+        app:week_title_label="六、日、一、二、三、四、五"
         app:weekend_color="#F96A31" />
 </RelativeLayout>

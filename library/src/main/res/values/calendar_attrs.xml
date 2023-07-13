@@ -10,8 +10,10 @@
         <attr name="week_title_color" format="color|reference" />
         <!-- 星期标题字体大小 -->
         <attr name="week_title_font_size" format="dimension" />
-        <!-- 星期标题，以分号分割，如：一、二、三、四、五、六、日。起始星期为星期一 -->
+        <!-- 星期标题，以顿号分割，如：一、二、三、四、五、六、日。起始星期为星期一 -->
         <attr name="week_title_label" format="string" />
+        <!-- 一周的第一天，1表示星期一，2表示星期二，7表示星期天，注！！！：设置了first_day_of_week，需要同时设置week_title_label -->
+        <attr name="first_day_of_week" format="integer" />
         <!-- 日期字体大小 -->
         <attr name="day_font_size" format="dimension" />
         <!-- 默认文字颜色 -->

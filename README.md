@@ -189,7 +189,8 @@ calendarView.setOnDateRangeSelectedListener {
     app:selected_day_color="#EFEFEF"
     app:week_title_color="#ff0000"
     app:week_title_font_size="12sp"
-    app:week_title_label="M、T、W、T、F、S、S"
+    app:first_day_of_week="6"
+    app:week_title_label="六、日、一、二、三、四、五"
     app:weekend_color="#F96A31" />
 ```
 #### 通用属性
@@ -201,7 +202,9 @@ calendarView.setOnDateRangeSelectedListener {
 
 > week_title_font_size：星期标题字体大小， eg: 12sp;
 
-> week_title_label：星期标题，以分号分割，如：一、二、三、四、五、六、日。起始星期为星期一;
+> week_title_label：星期标题，以顿号分割，如：一、二、三、四、五、六、日。起始星期为星期一;
+
+> first_day_of_week：一周的第一天，1表示星期一，2表示星期二，7表示星期天，注！！！：设置了first_day_of_week，需要同时设置week_title_label
 
 > default_color：默认文字颜色，类型：颜色码或者颜色引用, eg:#ffff00或者R.color.red;
 

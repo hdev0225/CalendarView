@@ -55,7 +55,7 @@ abstract class BaseMonthView (
     // 文字大小
     private val fontSize: Float = viewAttrs.dayFontSize
     // 日期原始数据
-    private val dateList: List<DateInfo> = DateUtil.buildDateList(monthDate.timeInMillis)
+    private val dateList: List<DateInfo> = DateUtil.buildDateList(monthDate.timeInMillis, viewAttrs.firstDayOfWeek)
     // 星期数目
     private var weekCount = DateUtil.calcWeekCount(dateList)
 

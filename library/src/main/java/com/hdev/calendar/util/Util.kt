@@ -113,6 +113,7 @@ object Util {
         )
         viewAttrs.weekTitleLabel = typedArray.getString(R.styleable.CalendarView_week_title_label)
         viewAttrs.headerView = typedArray.getString(R.styleable.CalendarView_header_view)
+        viewAttrs.firstDayOfWeek = typedArray.getInt(R.styleable.CalendarView_first_day_of_week, 1);
     }
 
     /**
